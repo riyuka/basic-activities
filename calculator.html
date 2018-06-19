@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+<body>
+	<div class="container">
+		<div class="col">
+		<button type='button' class='btn btn-primary' data-val="0">0</button>
+		<button type='button' class='btn btn-primary' data-val="1">1</button>
+		<button type='button' class='btn btn-primary' data-val="2">2</button>
+		<button type='button' class='btn btn-primary' data-val="3">3</button>
+		</div>
+		<div class="col">
+		<button type='button' class='btn btn-primary' data-val="4">4</button>
+		<button type='button' class='btn btn-primary' data-val="5">5</button>
+		<button type='button' class='btn btn-primary' data-val="6">6</button>
+		<button type='button' class='btn btn-primary' data-val="7">7</button>
+		</div>
+		<div class="col">
+		<button type='button' class='btn btn-primary' data-val="8">8</button>
+		<button type='button' class='btn btn-primary' data-val="9">9</button>
+		<button type='button' class='btn btn-danger' data-val="+">+</button>
+		<button type='button' class='btn btn-danger' data-val="-">-</button>
+		</div>
+		<div class="col">
+		<button type='button' class='btn btn-danger' data-val="×">×</button>
+		<button type='button' class='btn btn-danger' data-val="÷">÷</button>
+		<button type='button' class='btn btn-danger' data-val="^">^</button>
+		<button type='button' class='btn btn-success' data-val="=">=</button>
+		</div>
+		<button type='button' class='btn btn-warning' data-val="clear">clear</button>
+		<div id="display">
+		</div>
+	</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	var numOne = "";
+	var numTwo = "";
+	var operator = "";
+	var results = "";
+	
+	$('button').on('click', function(){
+		var valButton = $(this).data('val');
+		var type = typeof(valButton);
+		
+		if (type == 'number') {
+			if (numTwo == "" && operator == ""){
+				numOne += valButton; 
+			} else {
+				numTwo += valButton;
+			  }
+		} 
+		else { 
+			if (valButton !== '=') {
+				operator = valButton; 
+			} else if (operator == '+') {
+				results = parseInt(numOne) + parseInt(numTwo);
+			  } else if (operator == '-') {
+				  results = parseInt(numOne) - parseInt(numTwo);
+			    } else if  (operator == '×') {
+				    results = parseInt(numOne) * parseInt(numTwo);
+			      } else if  (operator == '÷') {
+				      results = parseInt(numOne) / parseInt(numTwo);
+			        } else if  (operator == '^') {
+				      results = Math.pow(parseInt(numOne), parseInt(numTwo));
+			        } 
+		}
+	   
+		$('#display').empty();
+		$('#display').append(numOne);
+		$('#display').append(operator);
+		$('#display').append(numTwo);
+		if (results !== "") {
+			$('#display').append( '=' + results);
+		};
+	    if (valButton == 'clear'){
+			$('#display').empty();
+			numOne = "";
+	        numTwo = "";
+	        operator = "";
+			results = "";
+		};
+	});
+	
+	
+
+
+
+
+</script>
+</body>
+</html>
